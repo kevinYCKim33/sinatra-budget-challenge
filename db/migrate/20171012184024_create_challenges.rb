@@ -6,6 +6,7 @@ class CreateChallenges < ActiveRecord::Migration
       t.decimal :budget, precision: 7, scale: 2
       t.integer :days
       t.timestamps
+      #end_date = 4 days + created_timestamps
     end
   end
 end
