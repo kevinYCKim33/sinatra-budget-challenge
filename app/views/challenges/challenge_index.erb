@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Challenges</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="/stylesheets/navbar-top-fixed.css" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/main.css" rel="stylesheet" type="text/css">
 
   </head>
 
@@ -28,8 +28,9 @@
           <!-- main nav links -->
           <ul class="nav navbar-nav">
             <li class="active"><a href="/challenges">View Challenges<span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Create a Challenge</a></li>
-            <li><a href="#">Log Spending</a></li>
+            <li><a href="/challenges/new">Create a Challenge</a></li>
+            <li><a href="/logs/new">Log Spending</a></li>
+            <li><a href="/logs">View Logs</a></li>
           </ul>
           <!-- social bar nav links -->
           <ul class="nav navbar-nav navbar-right">
@@ -39,24 +40,50 @@
       </div><!-- /.container-fluid -->
     </nav>
 
+
     <div class="container">
       <h2>Welcome, <%=current_user.username%> </h2>
       <h3>Your current challenges:</h3>
+      <% if flash.has?(:message) %>
+        <p style="color:red;"> <%= flash[:message] %> </p>
+      <% end %>
+
+      <% if current_user.challenges.empty? %>
+        <p>You do not have any budget challenges at the moment.</p>
+      <% else %>
       <br>
-      <div class="list-group">
-        <%@challenges.each do |challenge|%>
-          <a href="/challenges/<%=challenge.slug%>" class="list-group-item">
-            <h4 class="list-group-item-heading"><%=challenge.name%></h4>
-            <p class="list-group-item-text">Budget: $<%=sprintf("%.2f", challenge.budget)%></p>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                <span class="sr-only">40% Complete (success)</span>
+        <div class="list-group">
+          <%@challenges.order('id DESC').each do |challenge|%>
+            <a href="/challenges/<%=challenge.slug%>" class="list-group-item">
+              <h4 class="list-group-item-heading"><%=challenge.name%></h4>
+              <% if challenge.money_spent <= challenge.budget %>
+                <p style="color:green;" class="list-group-item-text"><b>Remaining Budget:</b> $<%=sprintf("%.2f", challenge.remaining_budget)%></p>
+                <p class="list-group-item-text"><b>Initial Budget</b> $<%=sprintf("%.2f", challenge.budget)%></p>
+              <% else %>
+                <p style="color:red;" class="list-group-item-text"><b>Over Budget By:</b> $<%=sprintf("%.2f", challenge.money_spent - challenge.budget)%></p>
+                <p class="list-group-item-text"><b>Initial Budget</b> $<%=sprintf("%.2f", challenge.budget)%></p>
+              <% end %>
+
+              <br>
+              <div class="progress">
+                <% if challenge.money_spent <= challenge.budget %>
+                  <div class="progress-bar progress-bar-success active progress-bar-striped" role="progressbar" style="width:<%=challenge.percentage_spent%>%; font-size: 15px;">
+                    <div style="color: black">$<%=sprintf("%.2f", challenge.money_spent)%></div>
+                  </div>
+                <% else %>
+                  <div class="progress-bar progress-bar-danger active progress-bar-striped" role="progressbar" style="width:100%; font-size: 15px;">
+                    $<%=sprintf("%.2f", challenge.money_spent)%>
+                  </div>
+                <% end %>
               </div>
-            </div>
-          </a>
-        <%end%>
-      </div>
+            </a>
+          <%end%>
+        </div>
+      <% end %>
       <a href="/challenges/new" class="btn btn-primary">Create a new challenge</a>
+      <br>
+      <br>
+      <br>
     </div>
 
 

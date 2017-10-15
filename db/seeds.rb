@@ -1,8 +1,8 @@
 User.create(username: "kevikim33", email: "kevikim33@gmail.com", password: "jumpman23")
 User.create(username: "tlau", email: "tlau@gmail.com", password: "beanie")
 
-Challenge.create(name: "Tahoe Trip", user_id: 1, budget: 350.25, days: 4)
-Challenge.create(name: "October: Eating out", user_id: 1, budget: 75.00, days: 20)
+Challenge.create(name: "Tahoe Trip", user_id: 1, budget: 350.2)
+Challenge.create(name: "October: Eating out", user_id: 1, budget: 75.00)
 
 Log.create(description: "ski", cost: 55)
 Log.create(description: "bbq by lake", cost: 25)

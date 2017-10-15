@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Create Budget Challenge</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="/stylesheets/main.css" rel="stylesheet" type="text/css">
+
+  </head>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">Fun Budget</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <!-- main nav links -->
+        <ul class="nav navbar-nav">
+          <li><a href="/challenges">View Challenges</a></li>
+          <li><a href="/challenges/new">Create a Challenge</a></li>
+          <li><a href="/logs/new">Log Spending</a></li>
+          <li class="active"><a href="/logs">View Logs</a></li>
+        </ul>
+        <!-- social bar nav links -->
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="logout" href="/logout" title="Log Out">Log Out</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+    <div class="container">
+      <h3>Your Spending Logs</h3>
+      <% if flash.has?(:message) %>
+        <p style="color:red;"> <%= flash[:message] %> </p>
+      <% end %>
+      <a href="/logs/new"><p>Log a new spending</p></a>
+      <table class="table left">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Cost</th>
+            <th>Date Logged</th>
+          <tr>
+        </thead>
+        <tbody>
+        <% @logs.order("id DESC").each do |log| %>
+          <tr>
+            <td><a href="/logs/<%=log.id%>"><%=log.description%></a></td>
+            <td>$<%=sprintf("%.2f", log.cost)%></td>
+            <td><%=log.date_logged%></td>
+          <tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

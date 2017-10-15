@@ -1,7 +1,26 @@
+/* Show it is fixed to the top */
 body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #eee;
+  background-color: #dee6ed;
+}
+
+.navbar {}
+
+.list-group {
+  max-width: 750px;
+}
+
+.left{
+  width: 600px;
+}
+
+.input-group {
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.input-group-sm {
+  min-width: 200px;
+  max-width: 200px;
 }
 
 .form-signin {

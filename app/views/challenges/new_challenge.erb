@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Challenges</title>
+    <title>Create Budget Challenge</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="/stylesheets/main.css" rel="stylesheet" type="text/css">
 
@@ -27,12 +27,12 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <!-- main nav links -->
           <ul class="nav navbar-nav">
-            <li><a href="/challenges">View Challenges<span class="sr-only"></span></a></li>
-            <li><a href="/challenges/new">Create a Challenge</a></li>
+            <li><a href="/challenges">View Challenges</a></li>
+            <li class="active"><a href="/challenges/new">Create a Challenge<span class="sr-only">(current)</span></a></li>
             <li><a href="/logs/new">Log Spending</a></li>
             <li><a href="/logs">View Logs</a></li>
           </ul>
-          <!-- Log out bar -->
+          <!-- social bar nav links -->
           <ul class="nav navbar-nav navbar-right">
             <li><a class="logout" href="/logout" title="Log Out">Log Out</a></li>
           </ul>
@@ -41,55 +41,22 @@
     </nav>
 
     <div class="container">
-      <h2><%=@challenge.name %></h2>
-        <% if @challenge.money_spent <= @challenge.budget %>
-          <h3>Remaining Budget: $<%=sprintf("%.2f", @challenge.remaining_budget)%></h3>
-          <p><b>Your target budget:</b> $<%=sprintf("%.2f", @challenge.budget)%> <a href="<%=@challenge.slug%>/edit">Change budget?</a></p>
-        <% else %>
-          <h3 style="color:red;">Over Budget By: $<%=sprintf("%.2f", @challenge.money_spent - @challenge.budget)%></h3>
-          <p><b>Your initial budget:</b> $<%=sprintf("%.2f", @challenge.budget)%> <a href="<%=@challenge.slug%>/edit">Increase budget?</a></p>
-        <% end %>
-
-          <p><b>Date Started:</b> <%=@challenge.date_started%></p>
-
-
-
-        <br>
-
-        <div class="progress left">
-          <% if @challenge.money_spent <= @challenge.budget %>
-            <div class="progress-bar progress-bar-success active progress-bar-striped" role="progressbar" style="width:<%=@challenge.percentage_spent%>%; font-size: 15px;">
-              <div style="color:black;">$<%=sprintf("%.2f", @challenge.money_spent)%></div>
-            </div>
-          <% else %>
-            <div class="progress-bar progress-bar-danger active progress-bar-striped" role="progressbar" style="width:100%; font-size: 15px;">
-              $<%=sprintf("%.2f", @challenge.money_spent)%>
-            </div>
-          <% end %>
-
+      <form class="form-signin" action="/challenges" method ="POST" >
+        <h4>Challenge Name</h4>
+        <div class="input-group">
+          <input type="text" class="form-control" name="name" placeholder="i.e. Limit Starbucks this week." aria-describedby="basic-addon1" required autofocus>
         </div>
-
-        <h4>Spending Logs</h4>
-        <table class="table left">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Cost</th>
-              <th>Date Logged</th>
-            <tr>
-          </thead>
-          <tbody>
-          <% @challenge.logs.order("id DESC").each do |log| %>
-            <tr>
-              <td><a href="/logs/<%=log.id%>"><%=log.description%></a></td>
-              <td>$<%=sprintf("%.2f", log.cost)%></td>
-              <td><%=log.date_logged%></td>
-            <tr>
-          <% end %>
-        </tbody>
-      </table>
-      <a href="/logs/new" class="btn btn-primary">Log Spending</a>
+        <h4>Target Budget</h4>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">$</span>
+          <input type="number" step="0.01" name="budget" class="form-control" placeholder="0.00" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary btn-lg">Challenge</button>
+      </form>
     </div>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

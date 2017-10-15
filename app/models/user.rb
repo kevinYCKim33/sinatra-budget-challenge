@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
   extend Slugifiable::ClassMethods
   has_secure_password
   has_many :challenges
+  has_many :logs
 end

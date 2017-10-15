@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013042336) do
+ActiveRecord::Schema.define(version: 20171015220233) do
 
   create_table "challenge_logs", force: :cascade do |t|
     t.integer "challenge_id"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20171013042336) do
     t.string   "name"
     t.integer  "user_id"
     t.decimal  "budget",     precision: 7, scale: 2
-    t.integer  "days"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,6 +31,7 @@ ActiveRecord::Schema.define(version: 20171013042336) do
     t.decimal  "cost",        precision: 7, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|

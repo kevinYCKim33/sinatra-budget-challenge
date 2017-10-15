@@ -1,8 +1,0 @@
-/* Show it is fixed to the top */
-body {
-  background-color: rgb(225,225,225);
-}
-
-.list-group {
-  max-width: 750px;
-}
