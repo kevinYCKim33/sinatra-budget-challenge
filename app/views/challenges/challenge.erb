@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Challenges</title>
+    <title><%=@challenge.name%></title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="/stylesheets/main.css" rel="stylesheet" type="text/css">
 
@@ -20,20 +20,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand">Fun Budget</a>
+          <a class="navbar-brand" href="/challenges">BudgetChallenges</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <!-- main nav links -->
           <ul class="nav navbar-nav">
-            <li><a href="/challenges">View Challenges<span class="sr-only"></span></a></li>
             <li><a href="/challenges/new">Create a Challenge</a></li>
             <li><a href="/logs/new">Log Spending</a></li>
             <li><a href="/logs">View Logs</a></li>
           </ul>
           <!-- Log out bar -->
           <ul class="nav navbar-nav navbar-right">
+            <li><a class="logout" href="/challenges" title="username"><%=current_user.username%></a></li>
             <li><a class="logout" href="/logout" title="Log Out">Log Out</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
