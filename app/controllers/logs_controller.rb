@@ -10,6 +10,7 @@ class LogsController < ApplicationController
   end
 
   post '/logs' do
+    
     @log = Log.new(params[:log])
     @log.user = current_user
     if @log.cost <= 0
@@ -34,7 +35,11 @@ class LogsController < ApplicationController
         redirect to "logs/new"
       end
       @log.save
-      redirect to "/logs"
+      if params[:challenge_slug].empty?
+        redirect to "/logs"
+      else
+        redirect to "/challenges/#{params[:challenge_slug]}"
+      end
     end
   end
 

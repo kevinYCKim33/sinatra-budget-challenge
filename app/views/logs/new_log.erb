@@ -40,6 +40,7 @@
 
   <div class="container">
     <form class="form-signin" action="/logs" method ="POST" >
+      <input type="hidden" id="hidden" name="challenge_slug" value="<%=@challenge_slug if @challenge_slug%>">
       <% if flash.has?(:message) %>
         <p style="color:red;"> <%= flash[:message] %> </p>
       <% end %>

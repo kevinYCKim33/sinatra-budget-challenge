@@ -54,6 +54,13 @@ class ChallengesController < ApplicationController
     end
   end
 
+  get '/challenges/:slug/logs/new' do
+    if logged_in?
+      @challenge = Challenge.find_by_slug(params[:slug])
+      @challenge_slug = params[:slug]
+      erb :"logs/new_log"
+  end
+
   patch '/challenges/:slug' do
     # binding.pry
     @challenge = Challenge.find_by_slug(params[:slug])
