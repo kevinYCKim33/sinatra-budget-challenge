@@ -1,4 +1,6 @@
-README File for my Sinatra Project tentatively titled Fun-Budget.
-Testing...
+# BudgetChallenge
 
-Testing again to see if title change works.
+## Usage
+
+To use this app, just clone, run `rake db:migrate` and then run `shotgun`.
+Everything should be set up.
