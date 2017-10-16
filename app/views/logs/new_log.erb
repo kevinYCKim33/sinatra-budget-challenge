@@ -59,7 +59,7 @@
       <% current_user.challenges.order('id DESC').each do |challenge|%>
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" name="log[challenge_ids][]" value="<%= challenge.id %>" id="<%= challenge.name %>">
+            <input class="form-check-input" type="checkbox" name="log[challenge_ids][]" value="<%= challenge.id %>"<%='checked' if @challenge_slug == challenge.slug %> id="<%= challenge.name %>">
             <%=challenge.name %>
           </label>
         </div>

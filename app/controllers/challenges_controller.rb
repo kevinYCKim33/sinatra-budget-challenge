@@ -54,11 +54,20 @@ class ChallengesController < ApplicationController
     end
   end
 
-  get '/challenges/:slug/logs/new' do
+  get '/challenges/:slug/new_log' do
     if logged_in?
       @challenge = Challenge.find_by_slug(params[:slug])
-      @challenge_slug = params[:slug]
-      erb :"logs/new_log"
+      if @challenge.user_id == session[:user_id]
+        @challenge_slug = params[:slug]
+        erb :"logs/new_log"
+      else
+        flash[:message] = "You're only allowed to log from your own challenge."
+        redirect to "/challenges"
+      end
+    else
+      flash[:message] = "Please log in to create a new log."
+      redirect to "/login"
+    end
   end
 
   patch '/challenges/:slug' do

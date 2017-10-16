@@ -10,7 +10,6 @@ class LogsController < ApplicationController
   end
 
   post '/logs' do
-    
     @log = Log.new(params[:log])
     @log.user = current_user
     if @log.cost <= 0
