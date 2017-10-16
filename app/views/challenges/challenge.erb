@@ -41,6 +41,9 @@
     </nav>
 
     <div class="container">
+      <% if flash.has?(:message) %>
+        <p style="color:green;"> <%= flash[:message] %> </p>
+      <% end %>
       <h2><%=@challenge.name %></h2>
         <% if @challenge.money_spent <= @challenge.budget %>
           <h3>Remaining Budget: $<%=sprintf("%.2f", @challenge.remaining_budget)%></h3>
@@ -68,6 +71,13 @@
           <% end %>
 
         </div>
+        <form action="/challenges/<%=@challenge.slug%>/delete" method="post" style="margin: 0; padding: 0;">
+          <input id="hidden" type="hidden" name="_method" value="delete">
+          <p>
+          <a href="/challenges/<%=@challenge.slug%>/edit" class="btn btn-primary">Edit</a>
+            <button style="display: inline;" type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+          </p>
+        </form>
 
         <h4>Spending Logs</h4>
         <table class="table left">

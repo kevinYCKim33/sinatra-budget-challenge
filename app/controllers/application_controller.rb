@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do #main shotgun page
-
+    redirect to "/login"
   end
 
   helpers do
