@@ -48,6 +48,9 @@
       <p><b>Cost:</b> $<%= sprintf("%.2f",@log.cost) %></p>
       <p><b>Date Logged:</b> <%=@log.date_logged%></p>
       <p><b>Challenge(s) log belongs to:</b></p>
+      <% if @log.challenges.empty? %>
+        <p>This log does not currently belong to a challenge.</p>
+      <% end %>
       <ul>
         <%@log.challenges.each do |challenge|%>
           <li><a href="/challenges/<%=challenge.slug%>"><%=challenge.name%></a></li>
