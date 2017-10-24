@@ -1,39 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>BudgetChallenge - Log in</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/user.css">
-    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
-  </head>
+<div class="container">
+  <form class="form-signin" action="/login" method="POST">
+    <h2 class="form-signin-heading">Please log in</h2>
+    <% if flash.has?(:message) %>
+      <p style="color:red;"> <%= flash[:message] %> </p>
+    <% end %>
+    <label for="inputEmail" class="sr-only" >Email address</label>
+    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
 
-  <body>
-    <div class="page-header">
-      <h2>BudgetChallenge <small style="color:gray;">Take control of your finances, one log at a time.</small></h2>
-    </div>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
 
-    <div class="container">
-
-          <form class="form-signin" action="/login" method="POST">
-            <h2 class="form-signin-heading">Please log in</h2>
-            <% if flash.has?(:message) %>
-              <p style="color:red;"> <%= flash[:message] %> </p>
-            <% end %>
-            <label for="inputEmail" class="sr-only" >Email address</label>
-            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
-
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-            Don't have an account? <a href="/signup">Sign up</a>
-          </form>
-
-    </div> <!-- /container -->
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-  </body>
-</html>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    Don't have an account? <a href="/signup">Sign up</a>
+  </form>
+</div>

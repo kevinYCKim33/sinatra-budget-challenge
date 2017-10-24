@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   get '/signup' do
     if !logged_in?
+      @page_title = "BudgetChallenge - Sign Up"
       erb :"users/signup"
     else
       flash[:message] = "Already logged in."
@@ -9,13 +10,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      flash[:message] ="Please fill out all the forms."
-      redirect to '/signup'
-    else
-      @user = User.create(params)
+    @user = User.new(params)
+    if @user.save
       session[:user_id] = @user.id
       redirect to '/challenges'
+    else
+      flash[:message] = @user.errors.full_messages.join(', ')
+      redirect to '/signup'
     end
   end
 
