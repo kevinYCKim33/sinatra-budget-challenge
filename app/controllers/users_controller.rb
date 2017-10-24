@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   get '/login' do
     if !logged_in?
+      @page_title = "BudgetChallenge - Log In"
       erb :"users/login"
     else
       flash[:message] = "Already logged in."

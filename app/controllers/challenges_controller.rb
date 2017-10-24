@@ -2,6 +2,7 @@ class ChallengesController < ApplicationController
 
   get '/challenges' do
     if logged_in?
+      @page_title = "Your Challenges"
       @challenges = current_user.challenges
       erb :"challenges/challenge_index"
     else
@@ -12,6 +13,7 @@ class ChallengesController < ApplicationController
 
   get '/challenges/new' do
     if logged_in?
+      @page_title = "Create a New Challenge"
       erb :"challenges/new_challenge"
     else
       flash[:message] = "Please log in first to create a challenge."
@@ -26,8 +28,10 @@ class ChallengesController < ApplicationController
 
   get '/challenges/:slug' do
     if logged_in?
+
       @challenge = Challenge.find_by_slug(params[:slug])
       if @challenge.user_id == session[:user_id]
+        @page_title = @challenge.name
         erb :"challenges/challenge"
       else
         flash[:message] = "You're only allowed to view your own challenge."
@@ -43,6 +47,7 @@ class ChallengesController < ApplicationController
     if logged_in?
       @challenge = Challenge.find_by_slug(params[:slug])
       if @challenge.user_id == session[:user_id]
+        @page_title = "Edit your Challenge"
         erb :"challenges/edit_challenge"
       else
         flash[:message] = "You're only allowed to edit your own challenge."
@@ -58,6 +63,7 @@ class ChallengesController < ApplicationController
     if logged_in?
       @challenge = Challenge.find_by_slug(params[:slug])
       if @challenge.user_id == session[:user_id]
+        @page_title = "Create a new log"
         @challenge_slug = params[:slug]
         erb :"logs/new_log"
       else

@@ -2,6 +2,7 @@ class LogsController < ApplicationController
   get '/logs' do
     if logged_in?
       @logs = current_user.logs
+      @page_title = "Your Logs"
       erb :"logs/logs_index"
     else
       flash[:message] = "Please log in first to view your spending logs."
@@ -44,6 +45,7 @@ class LogsController < ApplicationController
 
   get '/logs/new' do
     if logged_in?
+      @page_title = "Log Spending"
       erb :"logs/new_log"
     else
       flash[:message] = "Please log in first to log a spending."
@@ -55,6 +57,7 @@ class LogsController < ApplicationController
     if logged_in?
       @log = Log.find(params[:id])
       if @log.user_id == session[:user_id]
+        @page_title = "#{@log.description}"
         erb :"logs/log"
       else
         flash[:message] = "You're only allowed to view your own log."
@@ -70,6 +73,7 @@ class LogsController < ApplicationController
     if logged_in?
       @log = Log.find(params[:id])
       if @log.user_id == session[:user_id]
+        @page_title = "Edit your log"
         erb :"logs/edit_log"
       else
         flash[:message] = "You're only allowed to edit your own log."
