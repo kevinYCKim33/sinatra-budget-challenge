@@ -77,7 +77,6 @@ class ChallengesController < ApplicationController
   end
 
   patch '/challenges/:slug' do
-    # binding.pry
     @challenge = Challenge.find_by_slug(params[:slug])
     @challenge.name = params[:name]
     @challenge.budget = params[:budget]
