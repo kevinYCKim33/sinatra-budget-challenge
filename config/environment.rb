@@ -10,11 +10,7 @@
 #
 # require_all 'app'
 
-I am making small Sinatra app and trying to put it on Heroku server.
 
-when I do Heroku run rake db:migrate, Heroku is giving error "Gem::LoadError: Specified 'sqlite3' for database adapter, but the gem is not loaded. Add gem 'sqlite3' to your Gemfile (and ensure its version is at the minimum required by ActiveRecord)." .
-
-While I have a sqlite3 gem in development group in my gem file.
 
 source 'http://rubygems.org'
 ruby '2.3.1'
@@ -22,7 +18,7 @@ ruby '2.3.1'
 gem 'sinatra'
 gem 'activerecord', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
-gem 'sqlite3', :group => :development
+# gem 'sqlite3', :group => :development
 gem 'rake'
 gem 'require_all'
 gem 'thin'
@@ -43,7 +39,6 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
-Also, please see below environment file
 
 require 'bundler/setup'
 require 'rack-flash'
