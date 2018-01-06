@@ -1,4 +1,4 @@
-class RemoveDaysColumn < ActiveRecord::Migration
+class RemoveDaysColumn < ActiveRecord::Migration[5.0]
   def change
     remove_column(:challenges, :days)
   end
