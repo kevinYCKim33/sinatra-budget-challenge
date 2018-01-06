@@ -9,9 +9,9 @@ group :production do
   gem 'pg'
 end
 
-group :development do
-  gem 'sqlite3'
-end
+# group :development do
+#   gem 'sqlite3'
+# end
 gem 'thin'
 gem 'shotgun'
 gem 'pry'
